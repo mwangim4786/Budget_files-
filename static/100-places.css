@@ -1,8 +1,9 @@
 .places {
-	display: flex;
+	/* display: flex; */
 	justify-content: center;
-	flex-wrap: wrap;
-	margin: 10px auto;
+	/* flex-wrap: wrap; */
+	/* margin: 5px auto; */
+	padding: 10px;
 	text-align: center;
 }
 

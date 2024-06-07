@@ -1,97 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Budget Files</title>
+{% extends "page_template.html" %}
+{% set active_page = "approvals" %}
+{% block contents %}
 
-		<link rel="shortcut icon" href="images/icon.ico" >
 
-		<link rel="stylesheet" href="static/4-common.css"/>
-		<link rel="stylesheet" href="static/3-header.css"/>
-		<link rel="stylesheet" href="static/3-footer.css"/>
-		<link rel="stylesheet" href="static/6-filters.css"/>
-		<link rel="stylesheet" href="static/100-places.css"/>
-	</head>
-    <body>
-        <div class="container">
-            <header>
-                <div class="company">
-					<p style="padding: 0px 0px 0px 7px;">Budget Files</p>
-				</div>
-                <div class="user">
-					<p style="padding: 0px 0px 0px 14px;">Martin Kihungi</p>
-				</div>
-                <!-- <button style="border-right: 1px grey solid;">Search</button>
-                <button style="border-right: 1px grey solid;">Search</button>
-                <button >Search</button> -->
-            </header>
-            
-            
-            <section class="filters">
+<div class="content">
+
+    <section class="places">
+
+        <h1>Approvals</h1>
+
+        <table id="approvals_table" class="display" style="width:100%">
+            <thead style="background: #055041; color: #FFFFFF">
+                <th style="padding: 5px;">Request_id</th>
+                <th style="padding: 5px;">User</th>
+                <th style="padding: 5px;">Date</th>
+                <th style="padding: 5px;">Status</th>
+                <th style="padding: 5px;">Amount</th>
+                <th style="padding: 5px;">Action</th>
+            </thead>
+            <tbody>
                 
-                <a href="#home">Dashboard</a>
-                <a href="#news">Transactions</a>
-                <a class="active" href="#contact">Approvals</a>
-                <a href="#about">Users</a>
-
-            </section>
-
-
-            <div class="content">
-
-                <section class="places">
-
-                    <h1>Approvals</h1>
-
-                    <table>
-                        <thead style="background: #055041; color: #FFFFFF">
-                            <th style="padding: 5px;">Request_id</th>
-                            <th style="padding: 5px;">User</th>
-                            <th style="padding: 5px;">Date</th>
-                            <th style="padding: 5px;">Status</th>
-                            <th style="padding: 5px;">Amount</th>
-                        </thead>
-                        <tbody>
-                            <td style="padding: 5px;">bgt-003</td>
-                            <td style="padding: 5px;">Martin Kihungi</td>
-                            <td style="padding: 5px;">25-05-2024</td>
-                            <td style="padding: 5px;">Pending</td>
-                            <td style="padding: 5px;">150</td>
-                        </tbody>
-                    </table>
+                {% if data %}
+                
+                    {% for values in data.values() %}
+                    <tr>
+                        <td style="padding: 5px;">{{ values['request_id'] }}</td>
+                        <td style="padding: 5px;">{{ values['user'] }}</td>
+                        <td style="padding: 5px;">{{ values['date'] }}</td>
+                        <td style="padding: 5px;">{{ values['status'] }}</td>
+                        <td style="padding: 5px;">{{ values['amount'] }}</td>
+                        <td style="padding: 5px;"><button style="width: 100px; height: 25px; background-color: rgb(255, 149, 0);">Edit</button></td>
+                    </tr>
+                    {% endfor %}
+                
+                {% endif %}
+                
+            </tbody>
+        </table>
 
 
 
-    
-                    <!-- <article>
-                        <h1>Article One</h1>
-                    </article>
-    
-                    <article>
-                        <h1>Article Two</h1>
-                    </article>
-    
-                    <article>
-                        <h1>Article Three</h1>
-                    </article> -->
-    
-    
-                </section>
-            
-            </div>
+
+        <!-- <article>
+            <h1>Article One</h1>
+        </article>
+
+        <article>
+            <h1>Article Two</h1>
+        </article>
+
+        <article>
+            <h1>Article Three</h1>
+        </article> -->
 
 
+    </section>
 
-            
+</div>
 
-
-            <!-- </div> -->
-
-
-
-            
-            <footer>
-                <p>Budget Files</p>
-            </footer>
-        </div>
-	</body>
-</html>
+{% endblock contents %}

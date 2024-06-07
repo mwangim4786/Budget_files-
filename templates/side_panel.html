@@ -1,0 +1,41 @@
+
+
+<section class="filters">
+                
+    <div style="background-color: #055041; height: 48px; border-right: 1px solid #DDDDDD;">
+        <p style="text-align: center; line-height: 55px; margin: 0; color: aliceblue;">Budget Files</p>
+    </div>
+
+    {% if url_for(request.endpoint) == '/home' %}
+    <a class="active" href="home">Home</a>
+    {% else %}
+    <a href="home">Home</a>
+    {% endif %}
+
+    {% if url_for(request.endpoint) == '/approvals' %}
+    <a class="active" href="approvals">Approvals</a>
+    {% else %}
+    <a href="approvals">Approvals</a>
+    {% endif %}
+
+    {% if url_for(request.endpoint) == '/transactions' %}
+    <a class="active" href="transactions">Transactions</a>
+    {% else %}
+    <a href="transactions">Transactions</a>
+    {% endif %}
+
+    {% if url_for(request.endpoint) == '/budgets' %}
+    <a class="active" href="budgets">Budgets</a>
+    {% else %}
+    <a href="budgets">Budgets</a>
+    {% endif %}
+
+    {% if url_for(request.endpoint) == '/users' %}
+    <a class="active" href="users">Users</a>
+    {% else %}
+    <a href="users">Users</a>
+    {% endif %}
+
+
+
+</section>

@@ -1,0 +1,258 @@
+{% extends "page_template.html" %}
+{% block contents %}
+
+
+    <div class="content">
+
+        <section class="places">
+
+            <h1 style="text-align: center;">Users</h1>
+
+            <div>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalLong">
+                    Add user
+                </button>
+                
+                {% if message %}
+                <div style="margin-left: 15px; line-height: 10px;" class="alert alert-success" role="alert">
+                    {{ message | safe }}
+                    {{ url_for(request.endpoint) }}
+                </div>
+                {% endif %}
+
+            </div>
+
+
+
+
+
+            <table id="users_table" class="display" style="width:100%">
+                <thead style="background: #055041; color: #FFFFFF">
+                    <th style="padding: 5px;">Name</th>
+                    <th style="padding: 5px;">Email</th>
+                    <th style="padding: 5px;">Phone</th>
+                    <th style="padding: 5px;">Role</th>
+                    <th style="padding: 5px;">Password</th>
+                    <th style="padding: 5px;">Date</th>
+                    <th style="padding: 5px;">Action</th>
+                </thead>
+                <tbody>
+                    
+                    {% if users %}
+                    
+                        {% for user in users %}
+                        <tr>
+                            <td style="padding: 5px;">{{ user.name }}</td>
+                            <td style="padding: 5px;">{{ user.email }}</td>
+                            <td style="padding: 5px;">{{ user.phone }}</td>
+                            <td style="padding: 5px;">{{ user.role }}</td>
+                            <td style="padding: 5px;">{{ user.password }}</td>
+                            <td style="padding: 5px;">{{ user.date }}</td>
+                            <td style="padding: 5px;">
+                                <!-- <button style="width: 100px; height: 25px; background-color: rgb(255, 149, 0);">Edit</button> -->
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <!-- <form method="post" action="/users"> -->
+                                        <input type="hidden" name="edit_user_id" user_name="user.name" user_email="user.email" user_phone="user.phone" user_role="user.role" user_pass="user.password" id="edit_user_id" value="{{ user.id }}">
+                                        <button type="button" class="edit_user_btnbtn btn-warning btn-sm"  name="edit_user" id="edit_user_btnbtn" data-toggle="modal" data-target="#modal_edit_user">Edit</button>
+                                    <!-- </form> -->
+                                    <form method="post">
+                                        <input type="hidden" name="edit_user_id" id="delete_user_id" value="{{ user.id }}">
+                                        <button type="button" class="btn btn-danger btn-sm"  name="delete_user" id="{{ user.id }}">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    
+                    {% endif %}
+                    
+                </tbody>
+            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <form action="/users" method="POST">
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="Name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="phone" class="form-control" id="inputEmail3" placeholder="Phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="role" class="form-control" id="inputEmail3" placeholder="Role">
+                                </div>
+                            </div>
+                              
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                            
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- Edit User Modal -->
+            <div class="modal fade" id="modal_edit_user" tabindex="-1" role="dialog" aria-labelledby="modal_edit_userTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="modal_edit_userTitle">Edit User</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <form action="/users" method="POST">
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="edit_name" id="edit_name" class="form-control" id="inputEmail3" placeholder="Name">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" name="edit_email" id="edit_email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Phone</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="edit_phone" id="edit_phone" class="form-control" id="inputEmail3" placeholder="Phone">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Role</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="edit_role" id="edit_role" class="form-control" id="inputEmail3" placeholder="Role">
+                                </div>
+                            </div>
+                              
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-10">
+                                    <input type="password" name="edit_password" id="edit_password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                            
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- <form action="/checkout" method="POST">
+               
+                <div>
+                    <label for="amount" class="form-label">Phone No</label>
+                    <input type="text" class="form-control" id="phone_no" name="phone_no">
+                </div>
+
+                <div>
+                    <label for="amount" class="form-label">Amount</label>
+                    <input type="text" class="form-control form-control-sm" id="amount" name="amount">
+                </div>
+
+                <button type="submit" class="btn btn-success">MPESA</button>
+            </form> -->
+
+
+
+
+
+
+
+
+        </section>
+
+    </div>
+
+
+{% endblock contents %}

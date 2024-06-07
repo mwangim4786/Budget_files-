@@ -33,10 +33,11 @@
 }
 
 div.content {
-	margin-left: 200px;
+	margin: 5px 5px 5px 205px;
 	padding: 1px 1px;
 	height: 1000px;
-	border: 1px solid #FF5A5F;
+	border: 1px solid #aca4a4;
+	border-radius: 2px;
 }
 
 .company {
@@ -133,11 +134,11 @@ button {
 	color: #FFFFFF;
 	font-size: 18px;
 	
-	height: 48px;
-	width: 20%;
+	height: 38px;
+	/* width: 20%; */
 	background-color: #055041;
 	border-style: none;
-	border-radius: 0;
+	border-radius: 10%;
 
 	float: left;
 	/* margin-top: 11px;
