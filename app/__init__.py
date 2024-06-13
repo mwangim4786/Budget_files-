@@ -17,8 +17,14 @@ if ENV == 'dev':
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 else:
     app.debug = False
+
+    # heruku
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://u8cfl2g3qfs8kq:pdde98a7b527475b9496df5f71a1b1d6997b37ad68c7c65d9177fa085da046b3a@c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d6c7ebcbhbfj1q'
+    # local
     # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12king34pin@localhost/budget_db'
+    
+    # Render
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://budge_files_user:L0lVBVhg8uTzNj1lVSQwr1KGvdOrfJ3a@dpg-cpled0ud3nmc73cv7420-a.oregon-postgres.render.com/budge_files'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
