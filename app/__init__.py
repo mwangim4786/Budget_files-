@@ -1,0 +1,34 @@
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+
+
+app = Flask(__name__)
+
+# ENV = 'dev'
+ENV = 'prod'
+# secret key protects against modifying cookies, cross-site requests forgery atttacks etc.
+app.config['SECRET_KEY'] = '15363711818daf0f83459c25f7017a90'
+
+if ENV == 'dev':
+    app.debug = True
+    #  connect to db
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+else:
+    app.debug = False
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://u8cfl2g3qfs8kq:pdde98a7b527475b9496df5f71a1b1d6997b37ad68c7c65d9177fa085da046b3a@c8lj070d5ubs83.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/d6c7ebcbhbfj1q'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:12king34pin@localhost/budget_db'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# create db object
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
+
+
+
+from app import routes
